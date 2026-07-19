@@ -24,12 +24,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Reconstruct verified site
+      - name: Reconstruct and verify v2.1 site
         shell: bash
         run: |
           mkdir -p dist
-          cat .site-chunks/*.b64 | tr -d '\n' | base64 --decode > dist/index.html
-          echo "485f48ab0d396048f8b736c832bd043cfa698228cdad0782e8634f2aba4c37aa  dist/index.html" | sha256sum -c -
+          cat .site-v22/*.gz.b64 | tr -d '\n' | base64 --decode > /tmp/site-v21.html.gz
+          echo "dcb3b4ed2a1abfe4fbfa32adf7552846aafeda1e99e78e9fe521a6838775be23  /tmp/site-v21.html.gz" | sha256sum -c -
+          gzip -dc /tmp/site-v21.html.gz > dist/index.html
+          echo "57486256ab1da912f17b63559da06b757634bd058e0919d7ce01a386fe5aa6de  dist/index.html" | sha256sum -c -
+          grep -q "function relativeDualTransfer" dist/index.html
           cp service-worker.js dist/service-worker.js
 
       - name: Configure Pages
