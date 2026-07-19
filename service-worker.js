@@ -1,4 +1,4 @@
-const CACHE = "b58-exhaust-lab-v3";
+const CACHE = "b58-exhaust-lab-v4";
 const CORE = ["./", "./index.html"];
 
 self.addEventListener("install", event => {
