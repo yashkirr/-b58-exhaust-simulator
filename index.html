@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#111111" />
+  <meta name="description" content="A mobile-first dual-path exhaust acoustics concept simulator." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Dual-Path Exhaust Lab</title>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <div class="eyebrow">B58 CONCEPT TOOL</div>
+      <h1>Dual-Path Exhaust Lab</h1>
+      <p>Hear how a short branch and delayed long branch may interact before fabricating the exhaust.</p>
+    </div>
+    <button id="installBtn" class="secondary install" hidden>Install app</button>
+  </header>
+
+  <main>
+    <section class="notice">
+      <strong>What this simulates:</strong> pulse delay, branch attenuation, high-frequency loss and acoustic interference.
+      It is a concept tool, not a replacement for GT-POWER, CFD or physical testing.
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div>
+          <span class="step">1</span>
+          <h2>Choose a sound source</h2>
+        </div>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="synthetic" role="tab" aria-selected="true">Synthetic B58 sweep</button>
+        <button class="tab" data-tab="upload" role="tab" aria-selected="false">Use a real recording</button>
+      </div>
+
+      <div id="syntheticPanel" class="tab-panel active">
+        <div class="grid two">
+          <label>
+            Start RPM
+            <input id="rpmStart" type="number" min="700" max="8000" step="100" value="1200" />
+          </label>
+          <label>
+            End RPM
+            <input id="rpmEnd" type="number" min="800" max="8000" step="100" value="7000" />
+          </label>
+          <label>
+            Sweep duration
+            <div class="range-row">
+              <input id="duration" type="range" min="3" max="15" step="1" value="8" />
+              <output for="duration" id="durationOut">8 s</output>
+            </div>
+          </label>
+          <label>
+            Turbo texture
+            <div class="range-row">
+              <input id="turboTexture" type="range" min="0" max="100" step="1" value="22" />
+              <output for="turboTexture" id="turboTextureOut">22%</output>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div id="uploadPanel" class="tab-panel">
+        <label class="upload-zone" for="audioFile">
+          <input id="audioFile" type="file" accept="audio/*" />
+          <span class="upload-title">Choose an exhaust recording</span>
+          <span id="fileName">WAV, MP3, M4A or other browser-supported audio</span>
+        </label>
+        <p class="hint">A clean stationary microphone recording works best. The first 20 seconds are used.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div>
+          <span class="step">2</span>
+          <h2>Set the exhaust geometry</h2>
+        </div>
+        <select id="preset" aria-label="Preset">
+          <option value="custom">Custom</option>
+          <option value="subtle">Subtle depth</option>
+          <option value="warble">Pronounced warble</option>
+          <option value="aggressive">Aggressive phase</option>
+        </select>
+      </div>
+
+      <div class="pipe-diagram" aria-label="Simplified exhaust layout">
+        <div class="source-node">DP</div>
+        <div class="split-line"></div>
+        <div class="branch-stack">
+          <div class="branch short"><span>Short branch</span></div>
+          <div class="branch long"><span>Long delayed branch</span></div>
+        </div>
+        <div class="merge-line"></div>
+        <div class="source-node">BOX</div>
+      </div>
+
+      <div class="grid two">
+        <label>
+          Extra long-branch length
+          <div class="range-row">
+            <input id="extraLength" type="range" min="0" max="4" step="0.05" value="1.40" />
+            <output for="extraLength" id="extraLengthOut">1.40 m</output>
+          </div>
+        </label>
+
+        <label>
+          Exhaust gas temperature
+          <div class="range-row">
+            <input id="temperature" type="range" min="100" max="900" step="10" value="500" />
+            <output for="temperature" id="temperatureOut">500 °C</output>
+          </div>
+        </label>
+
+        <label>
+          Short-branch contribution
+          <div class="range-row">
+            <input id="shortGain" type="range" min="0" max="100" step="1" value="65" />
+            <output for="shortGain" id="shortGainOut">65%</output>
+          </div>
+        </label>
+
+        <label>
+          Long-branch contribution
+          <div class="range-row">
+            <input id="longGain" type="range" min="0" max="100" step="1" value="42" />
+            <output for="longGain" id="longGainOut">42%</output>
+          </div>
+        </label>
+
+        <label>
+          Long-branch high-frequency roll-off
+          <div class="range-row">
+            <input id="rolloff" type="range" min="500" max="8000" step="100" value="2800" />
+            <output for="rolloff" id="rolloffOut">2.8 kHz</output>
+          </div>
+        </label>
+
+        <label>
+          Muffler damping
+          <div class="range-row">
+            <input id="muffler" type="range" min="0" max="100" step="1" value="28" />
+            <output for="muffler" id="mufflerOut">28%</output>
+          </div>
+        </label>
+
+        <label>
+          Resonant reflection
+          <div class="range-row">
+            <input id="reflection" type="range" min="0" max="45" step="1" value="10" />
+            <output for="reflection" id="reflectionOut">10%</output>
+          </div>
+        </label>
+
+        <label>
+          Output mode
+          <select id="outputMode">
+            <option value="combined">Combined branches</option>
+            <option value="short">Short branch only</option>
+            <option value="long">Long branch only</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="metrics">
+        <div>
+          <span>Calculated delay</span>
+          <strong id="delayMetric">2.83 ms</strong>
+        </div>
+        <div>
+          <span>Wave speed</span>
+          <strong id="speedMetric">495 m/s</strong>
+        </div>
+        <div>
+          <span>First cancellation</span>
+          <strong id="cancelMetric">177 Hz</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div>
+          <span class="step">3</span>
+          <h2>Inspect the predicted acoustic effect</h2>
+        </div>
+      </div>
+      <canvas id="responseCanvas" width="1000" height="460" aria-label="Frequency response graph"></canvas>
+      <div class="legend">
+        <span><i class="line"></i> Combined branch response</span>
+        <span><i class="marker"></i> Approximate engine-order markers</span>
+      </div>
+    </section>
+
+    <section class="card sticky-player">
+      <div class="player-status">
+        <div>
+          <span id="statusLabel">Ready</span>
+          <strong id="statusDetail">Adjust the design, then render a preview.</strong>
+        </div>
+        <div id="timeDisplay">00:00</div>
+      </div>
+      <div class="controls">
+        <button id="renderBtn" class="primary">Render preview</button>
+        <button id="playBtn" class="secondary" disabled>Play</button>
+        <button id="stopBtn" class="secondary" disabled>Stop</button>
+        <button id="exportBtn" class="secondary" disabled>Export WAV</button>
+      </div>
+    </section>
+
+    <section class="card explanation">
+      <h2>How to interpret it</h2>
+      <p>
+        Deep dips in the graph indicate frequencies where the two paths partially cancel. Peaks indicate reinforcement.
+        Move the extra branch length and watch the pattern shift. A design that looks dramatic around normal cruising
+        frequencies may also create drone, so test several lengths rather than optimising for a single RPM.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    Dual-Path Exhaust Lab · Runs locally in your browser · No audio is uploaded
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
