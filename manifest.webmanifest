@@ -1,0 +1,17 @@
+{
+  "name": "Dual-Path Exhaust Lab",
+  "short_name": "Exhaust Lab",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#090909",
+  "theme_color": "#111111",
+  "description": "Mobile dual-path exhaust acoustics concept simulator.",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
