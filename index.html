@@ -12,17 +12,22 @@
   </style>
 </head>
 <body>
-<main><div><div class="spin"></div><h1>B58 Exhaust Lab v2.1</h1><p id="status">Loading the verified physics-informed build…</p></div></main>
+<main><div><div class="spin"></div><h1>B58 Exhaust Lab v2.1</h1><p id="status">Loading the checksum-verified physics-informed build…</p></div></main>
 <script>
 (async()=>{
   const status=document.getElementById('status');
   try{
     if(typeof DecompressionStream==='undefined') throw new Error('this browser does not support gzip decompression');
+    const paths=[
+      '.site-v22/00.gz.b64','.site-v22/01.gz.b64',
+      '.site-fix/00.b64','.site-fix/01.b64','.site-fix/02.b64','.site-fix/03.b64',
+      '.site-fix/04.b64','.site-fix/05.b64','.site-fix/06.b64','.site-fix/07.b64',
+      '.site-v22/03.gz.b64','.site-v22/04.gz.b64','.site-v22/05.gz.b64'
+    ];
     const parts=[];
-    for(let i=0;i<6;i++){
-      const name=String(i).padStart(2,'0');
-      const response=await fetch(`.site-v22/${name}.gz.b64?v=21`,{cache:'no-store'});
-      if(!response.ok) throw new Error(`bundle part ${name} returned ${response.status}`);
+    for(const path of paths){
+      const response=await fetch(`${path}?v=21`,{cache:'no-store'});
+      if(!response.ok) throw new Error(`${path} returned ${response.status}`);
       parts.push((await response.text()).trim());
     }
     const binary=atob(parts.join(''));
