@@ -28,7 +28,15 @@ jobs:
         shell: bash
         run: |
           mkdir -p dist
-          cat .site-v22/*.gz.b64 | tr -d '\n' | base64 --decode > /tmp/site-v21.html.gz
+          cat \
+            .site-v22/00.gz.b64 \
+            .site-v22/01.gz.b64 \
+            .site-fix/00.b64 .site-fix/01.b64 .site-fix/02.b64 .site-fix/03.b64 \
+            .site-fix/04.b64 .site-fix/05.b64 .site-fix/06.b64 .site-fix/07.b64 \
+            .site-v22/03.gz.b64 \
+            .site-v22/04.gz.b64 \
+            .site-v22/05.gz.b64 \
+            | tr -d '\n' | base64 --decode > /tmp/site-v21.html.gz
           echo "dcb3b4ed2a1abfe4fbfa32adf7552846aafeda1e99e78e9fe521a6838775be23  /tmp/site-v21.html.gz" | sha256sum -c -
           gzip -dc /tmp/site-v21.html.gz > dist/index.html
           echo "57486256ab1da912f17b63559da06b757634bd058e0919d7ce01a386fe5aa6de  dist/index.html" | sha256sum -c -
