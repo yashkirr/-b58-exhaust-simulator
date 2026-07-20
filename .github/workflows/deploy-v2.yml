@@ -49,12 +49,40 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
+      contents: write
       pages: write
       id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Checkout repository for deployment receipt
+        uses: actions/checkout@v4
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Write deployment receipt
+        if: always()
+        shell: bash
+        env:
+          DEPLOY_OUTCOME: ${{ steps.deployment.outcome }}
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          set -euo pipefail
+          cat > DEPLOYMENT_STATUS.md <<EOF
+          # GitHub Pages deployment status
+
+          - Outcome: ${DEPLOY_OUTCOME}
+          - Source commit: ${GITHUB_SHA}
+          - Workflow run: ${GITHUB_RUN_ID}
+          - Page URL: ${PAGE_URL:-unavailable}
+          - Recorded at: $(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          EOF
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add DEPLOYMENT_STATUS.md
+          git diff --cached --quiet || git commit -m "Record Pages deployment ${DEPLOY_OUTCOME}"
+          git push origin HEAD:main
