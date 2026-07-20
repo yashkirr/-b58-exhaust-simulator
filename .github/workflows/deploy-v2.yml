@@ -1,4 +1,4 @@
-name: Deploy physics-informed simulator
+name: Deploy B58 Exhaust Lab v3.1
 
 on:
   push:
@@ -24,23 +24,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Reconstruct and verify v2.1 site
+      - name: Reconstruct and audit v3.1 release
         shell: bash
         run: |
+          set -euo pipefail
           mkdir -p dist
-          cat \
-            .site-v22/00.gz.b64 \
-            .site-v22/01.gz.b64 \
-            .site-fix/00.b64 .site-fix/01.b64 .site-fix/02.b64 .site-fix/03.b64 \
-            .site-fix/04.b64 .site-fix/05.b64 .site-fix/06.b64 .site-fix/07.b64 \
-            .site-v22/03.gz.b64 \
-            .site-v22/04.gz.b64 \
-            .site-v22/05.gz.b64 \
-            | tr -d '\n' | base64 --decode > /tmp/site-v21.html.gz
-          echo "dcb3b4ed2a1abfe4fbfa32adf7552846aafeda1e99e78e9fe521a6838775be23  /tmp/site-v21.html.gz" | sha256sum -c -
-          gzip -dc /tmp/site-v21.html.gz > dist/index.html
-          echo "57486256ab1da912f17b63559da06b757634bd058e0919d7ce01a386fe5aa6de  dist/index.html" | sha256sum -c -
-          grep -q "function relativeDualTransfer" dist/index.html
+          cat .release/v3.1/part-*.b64 | tr -d '\n' | base64 --decode > /tmp/b58-v31.html.gz
+          echo "ab18c4fbcf43ffb7104eb8423564bcd2822c452870639e8a2f5b9d14871a451a  /tmp/b58-v31.html.gz" | sha256sum -c -
+          gzip -dc /tmp/b58-v31.html.gz > dist/index.html
+          echo "a9c2cc9462ca195088c3d1a8367da0187bb5acdc11e7a3f1204433c15c3062b6  dist/index.html" | sha256sum -c -
+          grep -q 'app-version" content="3.1.0' dist/index.html
+          grep -q 'function sharedNormalise' dist/index.html
+          grep -q 'function runAudit' dist/index.html
+          grep -q 'Best fit retained' dist/index.html
           cp service-worker.js dist/service-worker.js
 
       - name: Configure Pages
