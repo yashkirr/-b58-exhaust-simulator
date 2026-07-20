@@ -14,24 +14,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Assemble static Pages directory
+      - name: Reconstruct and verify audited v3.1 release
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p dist/.release/v3.1
-          cp index.html dist/index.html
+          mkdir -p dist
+
+          test "$(find .release/v3.1 -maxdepth 1 -name 'part-*.b64' | wc -l)" -eq 16
+
+          cat .release/v3.1/part-*.b64 \
+            | tr -d '\r\n' \
+            | base64 --decode \
+            > /tmp/b58-v31.html.gz
+
+          echo "ab18c4fbcf43ffb7104eb8423564bcd2822c452870639e8a2f5b9d14871a451a  /tmp/b58-v31.html.gz" \
+            | sha256sum -c -
+
+          gzip -t /tmp/b58-v31.html.gz
+          gzip -dc /tmp/b58-v31.html.gz > dist/index.html
+
+          echo "a9c2cc9462ca195088c3d1a8367da0187bb5acdc11e7a3f1204433c15c3062b6  dist/index.html" \
+            | sha256sum -c -
+
+          grep -q 'app-version" content="3.1.0' dist/index.html
+          grep -q 'function sharedNormalise' dist/index.html
+          grep -q 'function runAudit' dist/index.html
+          grep -q 'Best fit retained' dist/index.html
+
           cp service-worker.js dist/service-worker.js
-          cp .release/v3.1/part-*.b64 dist/.release/v3.1/
           touch dist/.nojekyll
-
           test -s dist/index.html
-          test "$(find dist/.release/v3.1 -name 'part-*.b64' | wc -l)" -eq 16
-          grep -q 'Loading B58 Exhaust Design Lab v3.1' dist/index.html
-          grep -q 'ab18c4fbcf43ffb7104eb8423564bcd2822c452870639e8a2f5b9d14871a451a' dist/index.html
-          grep -q 'a9c2cc9462ca195088c3d1a8367da0187bb5acdc11e7a3f1204433c15c3062b6' dist/index.html
-
-          printf 'Prepared Pages artifact with %s release segments\n' \
-            "$(find dist/.release/v3.1 -name 'part-*.b64' | wc -l)"
+          printf 'Prepared verified standalone site: %s bytes\n' "$(wc -c < dist/index.html)"
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
