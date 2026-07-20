@@ -1,4 +1,4 @@
-const CACHE="b58-exhaust-lab-v3.1.0";
+const CACHE="b58-exhaust-lab-v3.1.1";
 const CORE=["./","./index.html"];
 self.addEventListener("install",event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)));self.skipWaiting()});
 self.addEventListener("activate",event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))));self.clients.claim()});
