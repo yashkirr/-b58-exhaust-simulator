@@ -20,7 +20,7 @@ jobs:
           ref: main
 
       - name: Allow deployment to finish
-        run: sleep 35
+        run: sleep 40
 
       - name: Capture deployment results
         shell: bash
