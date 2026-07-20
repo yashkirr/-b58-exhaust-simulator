@@ -1,0 +1,21 @@
+{
+  "version": "3.1.0",
+  "embedded_dsp": {"passed": 10, "total": 10},
+  "black_box_browser": {
+    "passed": 7,
+    "total": 7,
+    "results": [
+      {"name": "Boot clean", "pass": true, "detail": "no errors"},
+      {"name": "Mobile no overflow", "pass": true, "detail": "checked at 390 px"},
+      {"name": "Internal DSP audit", "pass": true, "detail": "10/10"},
+      {"name": "Edit invalidates audio", "pass": true, "detail": "stale audio disabled"},
+      {"name": "Geometry changes audio", "pass": true, "detail": "digest delta 1.182e+05"},
+      {"name": "Recording transfer audible", "pass": true, "detail": "-0.81 dB residual"},
+      {"name": "Calibration retains best", "pass": true, "detail": "49.73 -> 44.73 -> 39.99 -> 36.45 dB; best retained"}
+    ]
+  },
+  "release_sha256": {
+    "gzip": "ab18c4fbcf43ffb7104eb8423564bcd2822c452870639e8a2f5b9d14871a451a",
+    "html": "a9c2cc9462ca195088c3d1a8367da0187bb5acdc11e7a3f1204433c15c3062b6"
+  }
+}
