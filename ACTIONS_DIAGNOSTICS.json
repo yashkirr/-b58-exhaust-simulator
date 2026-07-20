@@ -1,0 +1,226 @@
+{
+  "captured_at": "2026-07-20T10:33:36Z",
+  "diagnostic_run_id": "29735469215",
+  "runs": [
+    {
+      "id": 29735469215,
+      "name": "Diagnose Pages workflow",
+      "status": "in_progress",
+      "conclusion": null,
+      "event": "push",
+      "head_sha": "297af487b880fc77efdb7fb5e9e33a3425780913",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29735469215",
+      "created_at": "2026-07-20T10:33:29Z",
+      "updated_at": "2026-07-20T10:33:34Z"
+    },
+    {
+      "id": 29735469192,
+      "name": "Deploy simulator to GitHub Pages",
+      "status": "in_progress",
+      "conclusion": null,
+      "event": "push",
+      "head_sha": "297af487b880fc77efdb7fb5e9e33a3425780913",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29735469192",
+      "created_at": "2026-07-20T10:33:29Z",
+      "updated_at": "2026-07-20T10:33:35Z"
+    },
+    {
+      "id": 29735469171,
+      "name": "Deploy B58 Exhaust Lab v3.1",
+      "status": "in_progress",
+      "conclusion": null,
+      "event": "push",
+      "head_sha": "297af487b880fc77efdb7fb5e9e33a3425780913",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29735469171",
+      "created_at": "2026-07-20T10:33:29Z",
+      "updated_at": "2026-07-20T10:33:33Z"
+    },
+    {
+      "id": 29735351316,
+      "name": "Deploy B58 Exhaust Lab v3.1",
+      "status": "completed",
+      "conclusion": "failure",
+      "event": "push",
+      "head_sha": "647c43e33d33d1e24e897c952be1e9ca12c20a76",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29735351316",
+      "created_at": "2026-07-20T10:31:24Z",
+      "updated_at": "2026-07-20T10:31:59Z"
+    },
+    {
+      "id": 29735351299,
+      "name": "Deploy simulator to GitHub Pages",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "push",
+      "head_sha": "647c43e33d33d1e24e897c952be1e9ca12c20a76",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29735351299",
+      "created_at": "2026-07-20T10:31:24Z",
+      "updated_at": "2026-07-20T10:31:41Z"
+    },
+    {
+      "id": 29735295700,
+      "name": "Deploy simulator to GitHub Pages",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "push",
+      "head_sha": "309dad543d07f1a52d81242c6493602258d26707",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29735295700",
+      "created_at": "2026-07-20T10:30:26Z",
+      "updated_at": "2026-07-20T10:30:43Z"
+    },
+    {
+      "id": 29735295678,
+      "name": "Deploy B58 Exhaust Lab v3.1",
+      "status": "completed",
+      "conclusion": "failure",
+      "event": "push",
+      "head_sha": "309dad543d07f1a52d81242c6493602258d26707",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29735295678",
+      "created_at": "2026-07-20T10:30:26Z",
+      "updated_at": "2026-07-20T10:31:14Z"
+    },
+    {
+      "id": 29735238009,
+      "name": "Deploy simulator to GitHub Pages",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "push",
+      "head_sha": "a1bcf99e4833711b287630e2e0348ccdfbaf0902",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29735238009",
+      "created_at": "2026-07-20T10:29:28Z",
+      "updated_at": "2026-07-20T10:29:55Z"
+    },
+    {
+      "id": 29735237977,
+      "name": "Deploy B58 Exhaust Lab v3.1",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "event": "push",
+      "head_sha": "a1bcf99e4833711b287630e2e0348ccdfbaf0902",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29735237977",
+      "created_at": "2026-07-20T10:29:28Z",
+      "updated_at": "2026-07-20T10:29:40Z"
+    },
+    {
+      "id": 29735141890,
+      "name": "Deploy B58 Exhaust Lab v3.1",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "event": "push",
+      "head_sha": "ca152fe01537e894d17e9730adf9a073dc9e5962",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29735141890",
+      "created_at": "2026-07-20T10:27:45Z",
+      "updated_at": "2026-07-20T10:27:46Z"
+    },
+    {
+      "id": 29735141886,
+      "name": "Deploy simulator to GitHub Pages",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "push",
+      "head_sha": "ca152fe01537e894d17e9730adf9a073dc9e5962",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29735141886",
+      "created_at": "2026-07-20T10:27:45Z",
+      "updated_at": "2026-07-20T10:28:01Z"
+    },
+    {
+      "id": 29735083210,
+      "name": "Deploy B58 Exhaust Lab v3.1",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "event": "push",
+      "head_sha": "a1268006da8d04ae14e73b9365203a010438cbb0",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29735083210",
+      "created_at": "2026-07-20T10:26:43Z",
+      "updated_at": "2026-07-20T10:26:45Z"
+    },
+    {
+      "id": 29735083186,
+      "name": "Deploy simulator to GitHub Pages",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "push",
+      "head_sha": "a1268006da8d04ae14e73b9365203a010438cbb0",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29735083186",
+      "created_at": "2026-07-20T10:26:43Z",
+      "updated_at": "2026-07-20T10:27:00Z"
+    },
+    {
+      "id": 29734843377,
+      "name": "Deploy B58 Exhaust Lab v3.1",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "push",
+      "head_sha": "63a1a2b081936f0772b3a31b70fd9c334dac837d",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29734843377",
+      "created_at": "2026-07-20T10:22:34Z",
+      "updated_at": "2026-07-20T10:23:00Z"
+    },
+    {
+      "id": 29734843205,
+      "name": "Deploy simulator to GitHub Pages",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "event": "push",
+      "head_sha": "63a1a2b081936f0772b3a31b70fd9c334dac837d",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29734843205",
+      "created_at": "2026-07-20T10:22:34Z",
+      "updated_at": "2026-07-20T10:22:36Z"
+    },
+    {
+      "id": 29709704633,
+      "name": "Deploy simulator to GitHub Pages",
+      "status": "completed",
+      "conclusion": "failure",
+      "event": "push",
+      "head_sha": "911c3bd64a9a7f10600356b51fa404b4b5034818",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29709704633",
+      "created_at": "2026-07-20T00:35:09Z",
+      "updated_at": "2026-07-20T00:35:26Z"
+    },
+    {
+      "id": 29709704589,
+      "name": "Deploy B58 Exhaust Lab v3.1",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "event": "push",
+      "head_sha": "911c3bd64a9a7f10600356b51fa404b4b5034818",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29709704589",
+      "created_at": "2026-07-20T00:35:09Z",
+      "updated_at": "2026-07-20T00:35:10Z"
+    },
+    {
+      "id": 29709697197,
+      "name": "Deploy simulator to GitHub Pages",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "event": "push",
+      "head_sha": "72b33b21a2e9bf0a2a708ce06a419b6fe3328489",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29709697197",
+      "created_at": "2026-07-20T00:34:52Z",
+      "updated_at": "2026-07-20T00:35:12Z"
+    },
+    {
+      "id": 29709697182,
+      "name": "Deploy B58 Exhaust Lab v3.1",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "event": "push",
+      "head_sha": "72b33b21a2e9bf0a2a708ce06a419b6fe3328489",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29709697182",
+      "created_at": "2026-07-20T00:34:52Z",
+      "updated_at": "2026-07-20T00:34:54Z"
+    },
+    {
+      "id": 29709676041,
+      "name": "Deploy simulator to GitHub Pages",
+      "status": "completed",
+      "conclusion": "failure",
+      "event": "push",
+      "head_sha": "5d69b4d5bad177f9bea72081001542729bf61f9c",
+      "html_url": "https://github.com/yashkirr/-b58-exhaust-simulator/actions/runs/29709676041",
+      "created_at": "2026-07-20T00:34:05Z",
+      "updated_at": "2026-07-20T00:34:22Z"
+    }
+  ]
+}
