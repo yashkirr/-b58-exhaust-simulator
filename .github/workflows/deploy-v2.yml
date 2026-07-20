@@ -7,10 +7,6 @@ on:
       - DEPLOYMENT_STATUS.md
   workflow_dispatch:
 
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
