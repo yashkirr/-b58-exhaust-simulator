@@ -19,6 +19,9 @@ jobs:
         with:
           ref: main
 
+      - name: Allow deployment run to complete
+        run: sleep 25
+
       - name: Capture recent workflow runs
         shell: bash
         env:
@@ -39,5 +42,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git pull --rebase origin main
           git add ACTIONS_DIAGNOSTICS.json
-          git diff --cached --quiet || git commit -m "Record Actions diagnostics [skip ci]"
+          git diff --cached --quiet || git commit -m "Record final Actions diagnostics [skip ci]"
           git push origin HEAD:main
