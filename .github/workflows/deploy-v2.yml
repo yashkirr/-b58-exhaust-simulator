@@ -49,32 +49,43 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
-      contents: write
       pages: write
       id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout repository for deployment receipt
-        uses: actions/checkout@v4
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Write deployment receipt
-        if: always()
+  report:
+    if: always()
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Record workflow outcome
         shell: bash
         env:
-          DEPLOY_OUTCOME: ${{ steps.deployment.outcome }}
-          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          BUILD_RESULT: ${{ needs.build.result }}
+          DEPLOY_RESULT: ${{ needs.deploy.result }}
+          PAGE_URL: ${{ needs.deploy.outputs.page_url }}
         run: |
           set -euo pipefail
           cat > DEPLOYMENT_STATUS.md <<EOF
           # GitHub Pages deployment status
 
-          - Outcome: ${DEPLOY_OUTCOME}
+          - Build: ${BUILD_RESULT}
+          - Deploy: ${DEPLOY_RESULT}
           - Source commit: ${GITHUB_SHA}
           - Workflow run: ${GITHUB_RUN_ID}
           - Page URL: ${PAGE_URL:-unavailable}
@@ -83,6 +94,7 @@ jobs:
 
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git pull --rebase origin main
           git add DEPLOYMENT_STATUS.md
-          git diff --cached --quiet || git commit -m "Record Pages deployment ${DEPLOY_OUTCOME}"
+          git diff --cached --quiet || git commit -m "Record Pages workflow outcome"
           git push origin HEAD:main
