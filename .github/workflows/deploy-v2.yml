@@ -3,11 +3,13 @@ name: Deploy B58 Exhaust Lab v3.1
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - DEPLOYMENT_STATUS.md
   workflow_dispatch:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -96,5 +98,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git pull --rebase origin main
           git add DEPLOYMENT_STATUS.md
-          git diff --cached --quiet || git commit -m "Record Pages workflow outcome"
+          git diff --cached --quiet || git commit -m "Record Pages workflow outcome [skip ci]"
           git push origin HEAD:main
